@@ -16,11 +16,11 @@ RECOVERY_AFTER_40 = 0.35  # 在达到 >=40% 后，回撤降到 <35% 时发送一
 RESTORE_THRESHOLD = 0.20  # 回撤降到 <=20% 时发送一次恢复提醒并重置状态
 
 # 邮件配置
-EMAIL_USER = os.environ.get("EMAIL_USER")
-EMAIL_PASS = os.environ.get("EMAIL_PASS")
-EMAIL_TO = os.environ.get("EMAIL_TO", EMAIL_USER)
-SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT = int(os.environ.get("SMTP_PORT", 465))
+EMAIL_USER = os.environ["EMAIL_USER"]
+EMAIL_PASS = os.environ["EMAIL_PASS"]
+EMAIL_TO = os.environ["EMAIL_TO"]
+SMTP_HOST = "smtp.gmail.com"
+SMTP_PORT = 465
 
 
 def load_state():
@@ -192,7 +192,7 @@ def send_email(drawdown, tier, curr_price, max_price, max_date, curr_contributio
         f"当前回撤: {drawdown:.2%}\n"
         f"建议季度投资: €{curr_contribution} (此前建议: €{prev_contribution})\n\n"
         f"{note}\n\n"
-        "季度投资规则（状态机变迁条件）：\n"
+        "季度投资规则（状态变迁条件）：\n"
         "投资规则：\n"
         " - 日常状态（回撤 < 30%）：每季度 €300\n"
         " - 回撤达到或超过 30%：每季度 €450\n"
@@ -216,7 +216,7 @@ def send_email(drawdown, tier, curr_price, max_price, max_date, curr_contributio
         </table>
         
         <br>
-        <h3>季度投资规则（状态机变迁条件）</h3>
+        <h3>季度投资规则（状态变迁条件）</h3>
         <table border="1" cellpadding="6" style="border-collapse:collapse; text-align: left;">
             <tr style="background-color:#f2f2f2;">
                 <th>状态 / 变迁方向</th>

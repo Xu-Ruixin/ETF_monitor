@@ -1,0 +1,33 @@
+name: ETF Monitor
+
+on:
+  schedule:
+    - cron: '0 9 * * *' # 每天早上 9 点运行 (UTC时间)
+  workflow_dispatch:     # 允许你手动点击测试
+
+jobs:
+  run-monitor:
+    runs-on: ubuntu-latest
+    env:
+      EMAIL_USER: ${{ secrets.EMAIL_USER }}
+      EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Restore drawdown state cache
+        uses: actions/cache@v4
+        with:
+          path: .drawdown_state.json
+          key: drawdown-state-${{ runner.os }}-spyy-de
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run script
+        run: python monitor.py
+      - name: Save drawdown state cache
+        uses: actions/cache@v4
+        with:
+          path: .drawdown_state.json
+          key: drawdown-state-${{ runner.os }}-spyy-de

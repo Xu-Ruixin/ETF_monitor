@@ -2,8 +2,8 @@ name: Keep Alive
 
 on:
   schedule:
-    # 每个月1号的 UTC 00:00 自动运行一次
-    - cron: '0 0 1 * *'
+    # 每个月15号的 UTC 12:13 自动运行一次
+    - cron: '13 12 15 * *'
   workflow_dispatch: # 允许手动测试
 
 jobs:

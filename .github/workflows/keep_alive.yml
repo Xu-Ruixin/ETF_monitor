@@ -1,0 +1,25 @@
+name: Keep Alive
+
+on:
+  schedule:
+    # 每个月1号的 UTC 00:00 自动运行一次
+    - cron: '0 0 1 * *'
+  workflow_dispatch: # 允许手动测试
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create dummy change
+        run: |
+          date > keep_alive.txt
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add keep_alive.txt
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: keep repository active to prevent workflow suspension" && git push)

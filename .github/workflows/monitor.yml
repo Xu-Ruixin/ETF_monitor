@@ -2,7 +2,8 @@ name: ETF Monitor
 
 on:
   schedule:
-    - cron: '30 17 * * *' # 设置为 UTC 时间 17:30（即德国时间 19:30）
+    # 设置为 UTC 18:57 (即你的 GMT+3 时间 21:57) 进行测试
+    - cron: '57 18 * * *' # 设置为 UTC 时间 17:30（即德国时间 19:30）
   workflow_dispatch:     # 允许你手动点击测试
 
 jobs:

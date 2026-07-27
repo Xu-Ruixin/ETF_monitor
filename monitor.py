@@ -9,7 +9,7 @@ from datetime import datetime
 import yfinance as yf
 
 # 监控配置
-TICKER = "SPYY.DE"  # 你要监控的ETF代码，SPYY.DE 在 yfinance 中可用
+TICKER = "VWCE.DE"
 STATE_FILE = ".drawdown_state.json"
 ALERT_LEVELS = [0.30, 0.40]
 RECOVERY_AFTER_40 = 0.35  # 在达到 >=40% 后，回撤降到 <35% 时发送一次回落提醒

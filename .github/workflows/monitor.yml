@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-monitor:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       EMAIL_USER: ${{ secrets.EMAIL_USER }}
       EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
